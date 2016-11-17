@@ -1,0 +1,29 @@
+{
+  "name": "vue-component",
+  "version": "1.0.0",
+  "description": "some UI components for vue2.0 & bulma0.2",
+  "main": "index.js",
+  "dependencies": {
+    "vue": "^2.0.5",
+    "bulma": "^0.2.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/foora/vue-component.git"
+  },
+  "keywords": [
+    "bulma",
+    "vue",
+    "component"
+  ],
+  "author": "foora",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/foora/vue-component/issues"
+  },
+  "homepage": "https://github.com/foora/vue-component#readme"
+}
