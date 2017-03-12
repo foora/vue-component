@@ -115,7 +115,7 @@ export default {
 
 <style scoped>
   .jumpInput {
-    width: 36px;
+    width: 50px;
     height: 26px;
     text-align: center;
     line-height: 26px;
