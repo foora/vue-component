@@ -10,3 +10,5 @@ npm install --save bulma
 @import '~bluma'
 ```
 ###last: you can copy .vue file into your project,and import it
+
+license:mit
