@@ -1,22 +1,22 @@
 <template>
-	<nav class="pagination" v-if="showPagination">
-		<ul>
-			<li>
-				<span>共{{total}}条</span>
-			</li>
-			<li>
-				<span class="select">
-    <select v-model="pageSize">
-        <option v-for="size in pageSizes"  :value='size'>{{size}}条/页</option>
-    </select>
-    </span>
-			</li>
-			<li>
-				<a :class="[currentPage<=1?disableClass:'',buttonClass]" v-show="totalPage>5" @click="currentPage=1">&lt&lt</a>
-			</li>
-			<li>
-				<a :class="[currentPage<=1?disableClass:'',buttonClass]" v-show="totalPage>1" @click="currentPage=currentPage-1">&lt</a>
-			</li>
+    <nav class="pagination" v-if="showPagination">
+        <ul>
+            <li>
+                <span>共{{ total }}条</span>
+            </li>
+            <li>
+                <span class="select">
+                    <select v-model="pageSize">
+                        <option v-for="size in pageSizes"  :value='size'>{{size}}条/页</option>
+                    </select>
+                </span>
+            </li>
+            <li>
+                <a :class="[currentPage<=1?disableClass:'',buttonClass]" v-show="totalPage>5" @click="currentPage=1">&lt&lt</a>
+            </li>
+            <li>
+                <a :class="[currentPage<=1?disableClass:'',buttonClass]" v-show="totalPage>1" @click="currentPage=currentPage-1">&lt</a>
+            </li>
 			<li v-for="page in currentPages">
 				<a :class="[page===currentPage?activeClass:'',buttonClass]" @click="currentPage=page">{{page}}</a>
 			</li>
