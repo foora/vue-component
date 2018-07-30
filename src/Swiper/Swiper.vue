@@ -1,35 +1,35 @@
 <template>
-    <div ref="swiper" 
-         class="swiper-container" 
+    <div ref="swiper"
+         class="swiper-container"
          :style="{width: `${width/75}rem`, height: `${height/75}rem`}">
-        <div ref="swiperList" 
-             class="swiper-wrap" 
+        <div ref="swiperList"
+             class="swiper-wrap"
              :style="{transform: `translate3d(${(-width*(current+1)+offset)/75}rem, 0 , 0)`, transition: `${isScroll ? 'transform': 'none'} ${speed}ms`}"
              @transitionend="onTransitionEnd">
             <slot></slot>
         </div>
         <div class="icon"
-             v-if="$slots['prev-icon']" 
-             :style="prevStyle" 
-             @click.stop="prev" 
-             @touchstart.stop="" 
-             @touchmove.stop="" 
-             @touchend.stop="">
+             v-if="$slots['prev-icon']"
+             :style="prevStyle"
+             @click.stop="prev"
+             @touchstart.stop
+             @touchmove.stop
+             @touchend.stop>
             <slot name="prev-icon"></slot>
         </div>
         <div class="icon"
-             v-if="$slots['next-icon']" 
-             :style="nextStyle" 
-             @click.stop="next" 
-             @touchstart.stop="" 
-             @touchmove.stop="" 
-             @touchend.stop="">
+             v-if="$slots['next-icon']"
+             :style="nextStyle"
+             @click.stop="next"
+             @touchstart.stop
+             @touchmove.stop
+             @touchend.stop>
             <slot name="next-icon"></slot>
         </div>
         <ul v-if="dots" class="dots-list">
-            <li class="dot" 
+            <li class="dot"
                 v-for="index in length"
-                :key="index" 
+                :key="index"
                 :style="{backgroundColor: index - 1 === realCurrent ? dotsActiveColor : dotsColor}">
             </li>
         </ul>
@@ -78,12 +78,12 @@ export default {
         // prev按钮的位置大小信息对象
         prevStyle: {
             type: Object,
-            default: () => ({left: '5%', top: '40%', height: '20%', width: '5%'})
+            default: () => ({ left: '5%', top: '40%', height: '20%', width: '5%' })
         },
         // next按钮的位置大小信息对象
         nextStyle: {
             type: Object,
-            default: () => ({right: '5%', top: '40%', height: '20%', width: '5%'})
+            default: () => ({ right: '5%', top: '40%', height: '20%', width: '5%' })
         }
     },
     data: () => ({
@@ -104,7 +104,7 @@ export default {
     },
     mounted() {
         this.length = this.$refs.swiperList.children.length;
-        
+
         const swiperListFirstChild = this.$refs.swiperList.children[0];
         const swiperListLastChild = this.$refs.swiperList.children[this.length - 1];
         this.$refs.swiperList.appendChild(swiperListFirstChild.cloneNode(true));
@@ -139,22 +139,22 @@ export default {
                 if (Math.abs(lastX - startX) > 20) {
                     e.preventDefault();
                     this.firstMove = 'x';
-                    this.offset = (lastX - startX) * 2 / 3;
+                    !this.isScroll && (this.offset = (lastX - startX) * 2 / 3);
                 } else if (Math.abs(lastY - startY) > 20) {
                     this.firstMove = 'y';
                 }
             } else if (this.firstMove === 'x') {
                 e.preventDefault();
-                this.offset = (lastX - startX) * 2 / 3;
+                !this.isScroll && (this.offset = (lastX - startX) * 2 / 3);
             }
         },
         onTouchEnd(e) {
             if (this.firstMove === 'x') {
                 Math.abs(this.offset) >= this.width / 10 && (this.offset > 0 ? this.current-- : this.current++);
+                this.offset !== 0 && (this.isScroll = true);
                 this.offset = 0;
-                this.isScroll = true;
             } else {
-                this.setTimer();
+                !this.isScroll && this.setTimer();
             }
             this.isTouching = false;
             this.firstMove = '';
@@ -184,7 +184,7 @@ export default {
             clearTimeout(this.timer);
         }
     }
-}
+};
 </script>
 
 <style lang="scss" scoped>
